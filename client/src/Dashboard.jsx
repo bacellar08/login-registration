@@ -17,7 +17,7 @@ function Dashboard() {
         <Link>
           <button className="bg-blue-800 text-white px-2 my-1 rounded-md">Cadastros</button>
         </Link>
-        <Link>
+        <Link to='/login'>
           <button className="bg-blue-800 text-white px-2 my-1 rounded-md">Sair</button>
         </Link>
         </div>

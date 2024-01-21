@@ -11,7 +11,7 @@ mongoose.connect("mongodb+srv://alexandrebacellar:Iepf7F5OJV48zrg0@cluster0.evqu
 
 
 app.post("/login", (req, res) => {
-    const [email, password] = req.body;
+    const { email, password } = req.body;
     UsuarioModel.findOne({email: email})
     .then(user => {
         if(user) {
