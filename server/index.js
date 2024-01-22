@@ -39,6 +39,20 @@ app.post('/cadastrar', (req, res) => {
     .catch(err => res.json(err))
 })
 
+app.get('/cadastros', async (req, res) => {
+    const cadastros = await CadastroModel.find()
+    try {
+        res.status(200).json(cadastros)
+
+        console.log(cadastros)
+    } catch (error) {
+        res.status(500).json({message: 'Erro'})
+        console.log(error)
+    }
+})
+
+
+
 app.listen(3001, () => {
     console.log("Server is running")
 })

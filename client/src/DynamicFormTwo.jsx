@@ -14,6 +14,7 @@ const DynamicFormTwo = ({ contatos, onAddNewContato, onRemoveContato, onContatoC
               <div className="px-1 py-4">
               <label className="block" htmlFor="nomeContato">Nome</label>
               <input
+              required
               value={contato.nomeContato}
               className='outline-none rounded-md p-1'
               name='nomeContato'
@@ -26,6 +27,7 @@ const DynamicFormTwo = ({ contatos, onAddNewContato, onRemoveContato, onContatoC
               <div className="px-1 py-4">
               <label className="block" htmlFor="numeroContato">Contato</label>
               <input
+              required
               value={contato.numeroContato}
               className='outline-none rounded-md p-1'
               name="numeroContato"
@@ -38,6 +40,7 @@ const DynamicFormTwo = ({ contatos, onAddNewContato, onRemoveContato, onContatoC
               <div className="px-1 py-4">
               <label className="block" htmlFor="tipoContato">Tipo Contato</label>
               <input
+              required
               value={contato.tipoContato}
               className='outline-none rounded-md p-1'
               name='tipoContato'

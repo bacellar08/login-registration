@@ -7,6 +7,8 @@ const CadastroSchema = new mongoose.Schema({
     dataDeNascimento: Date,
     cpf: Number,
     rg: Number,
+    addresses: Array,
+    contatos: Array
 })
 
 const CadastroModel = mongoose.model("cadastros", CadastroSchema)

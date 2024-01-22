@@ -2,6 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import DynamicForm from "./DynamicForm"
 import DynamicFormTwo from "./DynamicFormTwo"
+import { useNavigate } from "react-router-dom"
 
 
 export default function Cadastrar() {
@@ -12,6 +13,7 @@ export default function Cadastrar() {
     const [email, setEmail] = useState()
     const [cpf, setCPF] = useState()
     const [rg, setRG] = useState()
+    const navigate = useNavigate()
 
     const [addresses, setAddresses] = useState([
         {
@@ -91,13 +93,15 @@ export default function Cadastrar() {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        axios.post('http://localhost:3001/cadastrar', {nome, sobrenome, dataDeNascimento, email, cpf, rg})
-        .then(result => console.log(result))
+        axios.post('http://localhost:3001/cadastrar', {nome, sobrenome, dataDeNascimento, email, cpf, rg, addresses, contatos})
+        .then(result => {console.log(result)
+        navigate('/dashboard')
+        })
         .catch(err => console.log(err))
     }
     
   return (
-    <div className="bg-slate-300">
+    <div>
 
     
     <div className="bg-slate-400 text-slate-800 flex p-6 w-[700px] rounded-md mx-auto shadow-lg">
@@ -109,6 +113,7 @@ export default function Cadastrar() {
             <div className="px-1 py-4">
             <label className="block" htmlFor="Nome">Nome</label>
             <input
+            required
             className='outline-none rounded-md p-1'
             name='nome'
             type="text"
@@ -118,6 +123,7 @@ export default function Cadastrar() {
             <div className="px-1 py-4">
             <label className="block" htmlFor="sobrenome">Sobrenome</label>
             <input
+            required
             className='outline-none rounded-md p-1'
             name="sobrenome" type="text"
             placeholder="Sobrenome"
@@ -126,6 +132,7 @@ export default function Cadastrar() {
             <div className="px-1 py-4">
             <label className="block" htmlFor="data">Data de Nascimento</label>
             <input
+            required
             className='outline-none rounded-md p-1'
             name='data'
             type="text"
@@ -135,6 +142,7 @@ export default function Cadastrar() {
             <div className="px-1 py-4">
             <label className="block" htmlFor="email">Email</label>
             <input
+            required
             className='outline-none rounded-md p-1'
             name="email"
             type="text"
@@ -144,6 +152,7 @@ export default function Cadastrar() {
             <div className="px-1 py-4">
             <label className="block" htmlFor="cpf">CPF</label>
             <input
+            required
             className='outline-none rounded-md p-1'
             name="cpf"
             type="text"
@@ -153,6 +162,7 @@ export default function Cadastrar() {
             <div className="px-1 py-4">
             <label className="block" htmlFor="rg">RG</label>
             <input
+            required
             className='outline-none rounded-md p-1'
             name="rg"
             type="text"
@@ -180,8 +190,7 @@ export default function Cadastrar() {
         onContatoChange={handleContatoChange}/>
         <div className="flex justify-start mt-[-40px]">
         <button className="bg-slate-200 rounded-md ml-8 p-2" onClick={addNewContato}>Adicionar novo contato</button>
-        </div>
-        
+        </div>        
 
         <button className="bg-blue-800 text-white rounded-md p-2 mt-10 ml-7 w-[150px]">Salvar</button>
         </div>

@@ -14,6 +14,7 @@ const DynamicForm = ({ addresses, onAddNewAddress, onRemoveAddress, onAddressCha
             <div className="px-1 py-4">
             <label className="block" htmlFor="logradouro">Logradouro</label>
             <input
+            required
             value={address.logradouro}
             className='outline-none rounded-md p-1'
             name='logradouro'
@@ -38,6 +39,7 @@ const DynamicForm = ({ addresses, onAddNewAddress, onRemoveAddress, onAddressCha
             <div className="px-1 py-4">
             <label className="block" htmlFor="cep">CEP</label>
             <input
+            required
             value={address.cep}
             className='outline-none rounded-md p-1'
             name='cep'
@@ -50,6 +52,7 @@ const DynamicForm = ({ addresses, onAddNewAddress, onRemoveAddress, onAddressCha
             <div className="px-1 py-4">
             <label className="block" htmlFor="complemento">Complemento</label>
             <input
+            required
             value={address.complemento}
             className='outline-none rounded-md p-1'
             name="complemento"
@@ -62,6 +65,7 @@ const DynamicForm = ({ addresses, onAddNewAddress, onRemoveAddress, onAddressCha
             <div className="px-1 py-4">
             <label className="block" htmlFor="cidade">Cidade</label>
             <input
+            required
             value={address.cidade}
             className='outline-none rounded-md p-1'
             name="cidade"
@@ -74,6 +78,7 @@ const DynamicForm = ({ addresses, onAddNewAddress, onRemoveAddress, onAddressCha
             <div className="px-1 py-4">
             <label className="block" htmlFor="estado">Estado</label>
             <input
+            required
             value={address.estado}
             className='outline-none rounded-md p-1'
             name="estado"

@@ -14,7 +14,7 @@ function Dashboard() {
         <Link to="/cadastrar" element={<Cadastrar/>}>
           <button className="bg-blue-800 text-white px-2 my-1 rounded-md ">Cadastrar Pessoa Física</button>
         </Link>
-        <Link>
+        <Link to="/cadastros">
           <button className="bg-blue-800 text-white px-2 my-1 rounded-md">Cadastros</button>
         </Link>
         <Link to='/login'>

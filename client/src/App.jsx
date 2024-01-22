@@ -1,4 +1,5 @@
 import Cadastrar from "./Cadastrar";
+import Cadastros from "./Cadastros";
 import Dashboard from "./Dashboard";
 import "./index.css"
 import Login from "./Login";
@@ -17,6 +18,7 @@ function App() {
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/dashboard" element={<Dashboard/>}></Route>
         <Route path="/cadastrar" element={<Cadastrar/>}></Route>
+        <Route path="/cadastros" element={<Cadastros/>}></Route>
       </Routes>
     </BrowserRouter>
   )
