@@ -1,107 +1,189 @@
+import axios from "axios"
+import { useState } from "react"
+import DynamicForm from "./DynamicForm"
+import DynamicFormTwo from "./DynamicFormTwo"
 
 
 export default function Cadastrar() {
+
+    const [nome, setNome] = useState()
+    const [sobrenome, setSobrenome] = useState()
+    const [dataDeNascimento, setDatadeNascimento] = useState()
+    const [email, setEmail] = useState()
+    const [cpf, setCPF] = useState()
+    const [rg, setRG] = useState()
+
+    const [addresses, setAddresses] = useState([
+        {
+          logradouro: "",
+          numero: "",
+          cep: "",
+          complemento: "",
+          cidade: "",
+          estado: "",
+        },
+      ]);
+    
+      const addNewAddress = () => {
+        setAddresses([
+          ...addresses,
+          {
+            logradouro: "",
+            numero: "",
+            cep: "",
+            complemento: "",
+            cidade: "",
+            estado: "",
+          },
+        ]);
+      };
+    
+      const removeAddress = (index) => {
+        const updatedAddresses = [...addresses];
+        updatedAddresses.splice(index, 1);
+        setAddresses(updatedAddresses);
+      };
+    
+      const handleAddressChange = (index, field, value) => {
+        const updatedAddresses = [...addresses];
+        updatedAddresses[index][field] = value;
+        setAddresses(updatedAddresses);
+      }
+
+
+    //   ----------------------------------------------
+
+    const [contatos, setContatos] = useState([
+        {
+          nomeContato: "",
+          numeroContato: "",
+          tipoContato: "",
+        },
+      ]);
+    
+      const addNewContato = () => {
+        setContatos([
+          ...contatos,
+          {
+            nomeContato: "",
+            numeroContato: "",
+            tipoContato: "",
+          },
+        ]);
+      };
+    
+      const removeContato = (index) => {
+        const updatedContatos = [...contatos];
+        updatedContatos.splice(index, 1);
+        setContatos(updatedContatos);
+      };
+    
+      const handleContatoChange = (index, field, value) => {
+        const updatedContatos = [...contatos];
+        updatedContatos[index][field] = value;
+        setContatos(updatedContatos);
+      }
+
+    // -------------------------------------------
+
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        axios.post('http://localhost:3001/cadastrar', {nome, sobrenome, dataDeNascimento, email, cpf, rg})
+        .then(result => console.log(result))
+        .catch(err => console.log(err))
+    }
+    
   return (
-    <div className="h-screen flex items-center justify-center">
-    <div className="bg-slate-400 text-slate-800 flex p-2 w-[620px] rounded-md">
-        <form>
+    <div className="bg-slate-300">
+
+    
+    <div className="bg-slate-400 text-slate-800 flex p-6 w-[700px] rounded-md mx-auto shadow-lg">
+        <form onSubmit={handleSubmit}>
         <div className="flex flex-col justify-between">
-        <h1 className="text-2xl pb-4">Cadastrar Pessoa Física</h1>
-        <h2 className="text-lg px-5">Dados Pessoais</h2>
+        <h1 className="text-2xl pb-4 mx-auto">Cadastrar Pessoa Física</h1>
+        <h2 className="text-lg px-5 ml-3">Dados Pessoais</h2>
         <div className="flex flex-wrap justify-center">
             <div className="px-1 py-4">
             <label className="block" htmlFor="Nome">Nome</label>
-            <input name='nome' type="text" placeholder="Nome"></input>
+            <input
+            className='outline-none rounded-md p-1'
+            name='nome'
+            type="text"
+            placeholder="Nome"
+            onChange={(e) => setNome(e.target.value)}></input>
             </div>
             <div className="px-1 py-4">
             <label className="block" htmlFor="sobrenome">Sobrenome</label>
-            <input name="sobrenome" type="text" placeholder="Sobrenome"></input>
+            <input
+            className='outline-none rounded-md p-1'
+            name="sobrenome" type="text"
+            placeholder="Sobrenome"
+            onChange={(e) => setSobrenome(e.target.value)}></input>
             </div>
             <div className="px-1 py-4">
             <label className="block" htmlFor="data">Data de Nascimento</label>
-            <input name='data' type="text" placeholder="31/01/1900"></input>
+            <input
+            className='outline-none rounded-md p-1'
+            name='data'
+            type="text"
+            placeholder="31/01/1900"
+            onChange={(e) => setDatadeNascimento(e.target.value)}></input>
             </div>
             <div className="px-1 py-4">
             <label className="block" htmlFor="email">Email</label>
-            <input name="email" type="text" placeholder="email@email.com"></input>
+            <input
+            className='outline-none rounded-md p-1'
+            name="email"
+            type="text"
+            placeholder="email@email.com"
+            onChange={(e) => setEmail(e.target.value)}></input>
             </div>
             <div className="px-1 py-4">
             <label className="block" htmlFor="cpf">CPF</label>
-            <input name="cpf" type="text" placeholder="999.999.999-99"></input>
+            <input
+            className='outline-none rounded-md p-1'
+            name="cpf"
+            type="text"
+            placeholder="999.999.999-99"
+            onChange={(e) => setCPF(e.target.value)}></input>
             </div>
             <div className="px-1 py-4">
             <label className="block" htmlFor="rg">RG</label>
-            <input name="rg" type="text" placeholder="999.999.99-9"></input>
+            <input
+            className='outline-none rounded-md p-1'
+            name="rg"
+            type="text"
+            placeholder="999.999.99-9"
+            onChange={(e) => setRG(e.target.value)}></input>
             </div>
             <div className="border-b-2 w-5/6 border-slate-500 m-10"></div>
         </div>
-        <h2 className="text-lg px-5">Endereço</h2>
-        <div className="flex flex-wrap justify-center">
-            <div className="px-1 py-4">
-            <label className="block" htmlFor="logradouro">Logradouro</label>
-            <input name='logradouro' type="text" placeholder="Rua sem Nome"></input>
-            </div>
-            <div className="px-1 py-4">
-            <label className="block" htmlFor="numero">Número</label>
-            <input name="numero" type="text" placeholder="9999"></input>
-            </div>
-            <div className="px-1 py-4">
-            <label className="block" htmlFor="cep">CEP</label>
-            <input name='cep' type="text" placeholder="99999-999"></input>
-            </div>
-            <div className="px-1 py-4">
-            <label className="block" htmlFor="complemento">Complemento</label>
-            <input name="complemento" type="text" placeholder="Casa 999"></input>
-            </div>
-            <div className="px-1 py-4">
-            <label className="block" htmlFor="cidade">Cidade</label>
-            <input name="cidade" type="text" placeholder="Rio de Janeiro"></input>
-            </div>
-            <div className="px-1 py-4">
-            <label className="block" htmlFor="estado">Estado</label>
-            <input name="estado" type="text" placeholder="RJ"></input>
-            </div>
-            <div className="flex justify-between w-full px-4">
-                <button className="bg-slate-200 rounded-md p-2">Adicionar novo endereço</button>
-                <button className="bg-slate-200 rounded-md p-2">Remover</button>
-            </div>
-            <div className="border-b-2 w-5/6 border-slate-500 m-10"></div>
+        <h2 className="text-lg px-5 ml-3">Endereço</h2>
+        <DynamicForm
+        addresses={addresses}
+        onAddNewAddress={addNewAddress}
+        onRemoveAddress={removeAddress}
+        onAddressChange={handleAddressChange}
+        />
+        <div className="flex justify-start mt-[-40px]">
+        <button className="bg-slate-200 rounded-md ml-8 p-2" onClick={addNewAddress}>Adicionar novo endereço</button>
         </div>
-        <h2 className="text-lg px-5">Contatos</h2>
-        <div className="flex flex-wrap justify-center">
-            <div className="px-1 py-4">
-            <label className="block" htmlFor="nomeContato">Nome</label>
-            <input name='nomeContato' type="text" placeholder="Nome do Contato"></input>
-            </div>
-            <div className="px-1 py-4">
-            <label className="block" htmlFor="contato">Contato</label>
-            <input name="contato" type="text" placeholder="Email/Telefone"></input>
-            </div>
-            <div className="px-1 py-4">
-            <label className="block" htmlFor="tipoContato">Tipo Contato</label>
-            <input name='tipoContato' type="text" placeholder="Email"></input>
-            </div>
-            <div className="px-1 py-4">
-            <label className="block" htmlFor="complemento">Complemento</label>
-            <input name="complemento" type="text" placeholder="Casa 999"></input>
-            </div>
-            <div className="px-1 py-4">
-            <label className="block" htmlFor="cidade">Cidade</label>
-            <input name="cidade" type="text" placeholder="Rio de Janeiro"></input>
-            </div>
-            <div className="px-1 py-4">
-            <label className="block" htmlFor="estado">Estado</label>
-            <input name="estado" type="text" placeholder="RJ"></input>
-            </div>
-            <div className="flex justify-between w-full px-4">
-                <button className="bg-slate-200 rounded-md p-2">Adicionar novo contato</button>
-                <button className="bg-slate-200 rounded-md p-2">Remover</button>
-            </div>
-            <div className="border-b-2 w-5/6 border-slate-500 m-10"></div>
+        <div className="border-b-2 w-5/6 border-slate-500 m-10"></div>
+        <h2 className="text-lg px-5 ml-3">Contatos</h2>
+        <DynamicFormTwo
+        contatos={contatos}
+        onAddNewContato={addNewContato}
+        onRemoveContato={removeContato}
+        onContatoChange={handleContatoChange}/>
+        <div className="flex justify-start mt-[-40px]">
+        <button className="bg-slate-200 rounded-md ml-8 p-2" onClick={addNewContato}>Adicionar novo contato</button>
         </div>
         
 
-        <button className="bg-blue-800 text-white rounded-md p-2 w-[150px]">Salvar</button>
+        <button className="bg-blue-800 text-white rounded-md p-2 mt-10 ml-7 w-[150px]">Salvar</button>
         </div>
         </form>
 

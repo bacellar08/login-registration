@@ -2,6 +2,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
 const UsuarioModel = require("./Models/Usuarios")
+const CadastroModel = require("./Models/Cadastro")
 
 const app = express()
 app.use(express.json())
@@ -29,6 +30,12 @@ app.post("/login", (req, res) => {
 app.post('/signup', (req, res) => {
     UsuarioModel.create(req.body)
     .then(user => res.json(user))
+    .catch(err => res.json(err))
+})
+
+app.post('/cadastrar', (req, res) => {
+    CadastroModel.create(req.body)
+    .then(cadastro => res.json(cadastro))
     .catch(err => res.json(err))
 })
 
