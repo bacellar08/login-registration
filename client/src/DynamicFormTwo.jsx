@@ -10,7 +10,7 @@ const DynamicFormTwo = ({ contatos, onAddNewContato, onRemoveContato, onContatoC
         {contatos.map((contato, index) => (
           
           <div className="flex flex-wrap justify-center" key={index}>
-              <div className="flex flex-wrap justify-center">
+              <div className="flex flex-wrap justify-center mx-7">
               <div className="px-1 py-4">
               <label className="block" htmlFor="nomeContato">Nome</label>
               <input
@@ -39,19 +39,23 @@ const DynamicFormTwo = ({ contatos, onAddNewContato, onRemoveContato, onContatoC
               </div>
               <div className="px-1 py-4">
               <label className="block" htmlFor="tipoContato">Tipo Contato</label>
-              <input
+              <select
               required
-              value={contato.tipoContato}
-              className='outline-none rounded-md p-1'
+              className='outline-none rounded-md p-1 w-[190px]'
               name='tipoContato'
+              value={contato.tipoContato}
               type="text"
               placeholder="99999-999"
               onChange={e =>
                   onContatoChange(index, "tipoContato", e.target.value)
-                }></input>
+                }>
+                  <option value='select'>Tipo de Contato</option>
+                  <option>Email</option>
+                  <option>Telefone</option>
+                </select>
               </div>
               <div className="flex justify-end w-full px-4">
-          <button onClick={() => onRemoveContato(index)} className="bg-slate-200 rounded-md p-2 z-10 mr-5">Remover</button>
+          <button onClick={() => onRemoveContato(index)} className="bg-slate-200 rounded-md p-2 z-10 mr-[-9px]">Remover</button>
               </div>
           </div>
           </div>

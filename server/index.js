@@ -51,6 +51,22 @@ app.get('/cadastros', async (req, res) => {
     }
 })
 
+app.delete('/cadastros/:id', async (req, res) => {
+    const cadastroId = req.params.id
+    console.log(cadastroId)
+
+    try {
+        const deletedCadastro = await CadastroModel.findByIdAndDelete(cadastroId)
+
+        if (!deletedCadastro) {
+            return res.status(400).json({message: 'Cadastro não encontrado'})
+        }
+
+        res.status(200).json({message: 'Cadastro deletado com sucesso.'})
+    } catch (error) {
+        res.status(500).json({message: 'Erro ao deletar cadastro.'})
+    }
+})
 
 
 app.listen(3001, () => {

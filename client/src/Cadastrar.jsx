@@ -2,7 +2,8 @@ import axios from "axios"
 import { useState } from "react"
 import DynamicForm from "./DynamicForm"
 import DynamicFormTwo from "./DynamicFormTwo"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import cpfCheck from "cpf-check"
 
 
 export default function Cadastrar() {
@@ -89,9 +90,17 @@ export default function Cadastrar() {
     // -------------------------------------------
 
 
+    const [cpfValido, setCPFValido] = useState(true)
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        if (!cpfCheck.validate(cpf)) {
+          setCPFValido(false);
+          return;
+      }
+
+      setCPFValido(true);
 
         axios.post('http://localhost:3001/cadastrar', {nome, sobrenome, dataDeNascimento, email, cpf, rg, addresses, contatos})
         .then(result => {console.log(result)
@@ -104,7 +113,7 @@ export default function Cadastrar() {
     <div>
 
     
-    <div className="bg-slate-400 text-slate-800 flex p-6 w-[700px] rounded-md mx-auto shadow-lg">
+    <div className="bg-slate-400 text-slate-800 flex flex-col p-6 w-[700px] rounded-md my-10 mx-auto shadow-lg">
         <form onSubmit={handleSubmit}>
         <div className="flex flex-col justify-between">
         <h1 className="text-2xl pb-4 mx-auto">Cadastrar Pessoa Física</h1>
@@ -133,9 +142,9 @@ export default function Cadastrar() {
             <label className="block" htmlFor="data">Data de Nascimento</label>
             <input
             required
-            className='outline-none rounded-md p-1'
+            className='outline-none rounded-md p-1 w-[190px]'
             name='data'
-            type="text"
+            type="date"
             placeholder="31/01/1900"
             onChange={(e) => setDatadeNascimento(e.target.value)}></input>
             </div>
@@ -150,14 +159,16 @@ export default function Cadastrar() {
             onChange={(e) => setEmail(e.target.value)}></input>
             </div>
             <div className="px-1 py-4">
-            <label className="block" htmlFor="cpf">CPF</label>
+            <label className="block " htmlFor="cpf">CPF</label>
             <input
             required
-            className='outline-none rounded-md p-1'
+            className={`outline-none rounded-md p-1 ${!cpfValido ? 'border-red-500' : ''}`}
             name="cpf"
             type="text"
             placeholder="999.999.999-99"
-            onChange={(e) => setCPF(e.target.value)}></input>
+            onChange={(e) => {setCPF(e.target.value)
+            setCPFValido(true)}}></input>
+            {!cpfValido && <p className="text-red-700">CPF inválido.</p>}
             </div>
             <div className="px-1 py-4">
             <label className="block" htmlFor="rg">RG</label>
@@ -168,6 +179,7 @@ export default function Cadastrar() {
             type="text"
             placeholder="999.999.99-9"
             onChange={(e) => setRG(e.target.value)}></input>
+            
             </div>
             <div className="border-b-2 w-5/6 border-slate-500 m-10"></div>
         </div>
@@ -195,7 +207,7 @@ export default function Cadastrar() {
         <button className="bg-blue-800 text-white rounded-md p-2 mt-10 ml-7 w-[150px]">Salvar</button>
         </div>
         </form>
-
+        <Link className="bg-blue-800 text-white rounded-md p-2 w-[150px] mt-[-40px] ml-[72%] text-center" to='/dashboard'>Voltar</Link>
     </div>
     </div>
   )
