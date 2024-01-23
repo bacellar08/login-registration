@@ -13,7 +13,6 @@
     "axios": "^1.6.5",
     "cpf-check": "^3.0.0",
     "dropzone": "^6.0.0-beta.2",
-    "gerador-validador-cpf": "^5.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",

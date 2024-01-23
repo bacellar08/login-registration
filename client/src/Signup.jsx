@@ -1,22 +1,29 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react"
+import { Link } from "react-router-dom"
 import axios from 'axios'
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
+import FileUpload from "./FileUpload"
 
 
 export default function Signup() {
 
-    const [name, setName] = useState()
-    const [email, setEmail] = useState()
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
     const [phone, setPhone] = useState()
     const [password, setPassword] = useState()
+    const [imageUrl, setImageUrl] = useState(null)
     const [buttonText, setButtonText] = useState('Cadastrar Usuário')
     const navigate = useNavigate()
 
-    const handleSubmit = (e) => {
+    const handleImageUrlChange = url => {
+        // Atualiza o estado com a URL da imagem
+        setImageUrl(url);
+      }
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
-        axios.post('http://localhost:3001/signup', {name, email, phone, password})
+        await axios.post('http://localhost:3001/signup', {name, email, phone, password, imageUrl})
         .then(result => {console.log(result)
         setButtonText('Usuário cadastrado.')
         navigate('/login')
@@ -25,6 +32,8 @@ export default function Signup() {
         .catch(err => console.log(err))
 
     }
+
+
 
 
   return (
@@ -71,13 +80,12 @@ export default function Signup() {
             onChange={(e) => setPassword(e.target.value)}></input> 
             </div>
         </div>
+        <FileUpload onImageUrlChange={handleImageUrlChange} />
         <Link to='/login' className="p-1 hover:text-white w-60">Já sou cadastrado. Ir para Login.</Link>
-        <button className="bg-blue-800 text-white rounded-md p-1 w-[300px] hover:bg-blue-700">{buttonText}</button>
+        <button onClick={console.log(imageUrl)} className="bg-blue-800 text-white rounded-md p-1 w-[300px] hover:bg-blue-700">{buttonText}</button>
         </div>
         </form>
-        <div>
-            <button className="bg-blue-800 hover:bg-blue-700 p-20 text-white rounded-md">Upload Imagem</button>
-        </div>
+
 
     </div>
     </div>

@@ -3,6 +3,8 @@ const mongoose = require("mongoose")
 const cors = require("cors")
 const UsuarioModel = require("./Models/Usuarios")
 const CadastroModel = require("./Models/Cadastro")
+const multer = require('multer');
+const path = require('path');
 
 const app = express()
 app.use(express.json())
@@ -67,6 +69,40 @@ app.delete('/cadastros/:id', async (req, res) => {
         res.status(500).json({message: 'Erro ao deletar cadastro.'})
     }
 })
+
+// Upload Imagem
+
+const storage = multer.diskStorage({
+    destination: './uploads/',
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    },
+  });
+
+  const upload = multer({
+    storage,
+    fileFilter: function (req, file, cb) {
+      const allowedFileTypes = ['image/jpeg', 'image/png'];
+      if (allowedFileTypes.includes(file.mimetype)) {
+        cb(null, true);
+      } else {
+        cb(new Error('Tipo de arquivo não suportado. Apenas imagens JPEG ou PNG são permitidas.'));
+      }
+    },
+  });
+
+  app.post('/upload', upload.single('file'), async (req, res) => {
+    try {
+      // Construir a URL completa da imagem
+      const imageUrl = `/uploads/${req.file.filename}`
+  
+      // Responda ao cliente com a URL da imagem
+      await res.json({ imageUrl });
+    } catch (error) {
+      console.error('Erro ao processar o upload:', error);
+      res.status(500).json({ error: 'Erro ao processar o upload.' });
+    }
+  });
 
 
 app.listen(3001, () => {
