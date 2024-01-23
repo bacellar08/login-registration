@@ -38,6 +38,7 @@ Inicie o servidor:
 
 cd server
 npm start
+
 O servidor estará rodando em http://localhost:3001
 
 Inicie o cliente React:
