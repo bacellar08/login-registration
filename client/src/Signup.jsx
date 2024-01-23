@@ -39,15 +39,15 @@ export default function Signup() {
   return (
     
     <div className="h-screen flex items-center justify-center">
-    <div className="bg-slate-400 text-slate-800 flex p-2 w-[620px] rounded-md">
         <form onSubmit={handleSubmit}>
+        <div className="bg-slate-400 text-slate-800 flex p-2 w-[620px] rounded-md">
         <div className="h-[200px] flex flex-col justify-between">
         <h1 className="text-2xl">Cadastrar Usuário</h1>
         <div className="flex flex-wrap">
             <div className="px-1">
             <label className="block" htmlFor="userName">Username</label>
             <input
-            className="outline-none"
+            className="outline-none px-1 rounded-md w-[90%]"
             required
             name='userName'
             type="text"
@@ -56,7 +56,7 @@ export default function Signup() {
             <div className="px-1">
             <label className="block" htmlFor="email">Email</label>
             <input
-            className="outline-none"
+            className="outline-none px-1 rounded-md w-[90%]"
             required
             name="email"
             type="email"
@@ -65,7 +65,7 @@ export default function Signup() {
             <div className="px-1">
             <label className="block" htmlFor="phone">Telefone</label>
             <input
-            className="outline-none"
+            className="outline-none px-1 rounded-md w-[90%]"
             name='phone'
             type="text"
             onChange={(e) => setPhone(e.target.value)}></input>
@@ -73,21 +73,23 @@ export default function Signup() {
             <div className="px-1">
             <label className="block" htmlFor="password">Senha</label>
             <input
-            className="outline-none"
+            className="outline-none px-1 rounded-md w-[90%]"
             required
             name="password"
             type="password"
             onChange={(e) => setPassword(e.target.value)}></input> 
             </div>
-        </div>
-        <FileUpload onImageUrlChange={handleImageUrlChange} />
         <Link to='/login' className="p-1 hover:text-white w-60">Já sou cadastrado. Ir para Login.</Link>
         <button onClick={console.log(imageUrl)} className="bg-blue-800 text-white rounded-md p-1 w-[300px] hover:bg-blue-700">{buttonText}</button>
         </div>
-        </form>
+        </div>
+        <div>
+        <FileUpload onImageUrlChange={handleImageUrlChange}/>
+        </div>
 
 
-    </div>
+      </div>
+    </form>
     </div>
   )
 }

@@ -1,16 +1,19 @@
-const express = require("express")
-const mongoose = require("mongoose")
-const cors = require("cors")
-const UsuarioModel = require("./Models/Usuarios")
-const CadastroModel = require("./Models/Cadastro")
+require('dotenv').config();
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const UsuarioModel = require("./Models/Usuarios");
+const CadastroModel = require("./Models/Cadastro");
 const multer = require('multer');
 const path = require('path');
+
 
 const app = express()
 app.use(express.json())
 app.use(cors())
 
-mongoose.connect("mongodb+srv://alexandrebacellar:Iepf7F5OJV48zrg0@cluster0.evqus2o.mongodb.net/usuarios");
+const databaseUrl = process.env.DATABASE_URL
+mongoose.connect(databaseUrl);
 
 
 app.post("/login", (req, res) => {

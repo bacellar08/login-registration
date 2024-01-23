@@ -35,6 +35,7 @@ function Login() {
             <div className="px-1">
             <label className="block" htmlFor="email">Email</label>
             <input
+            className="outline-none px-1 rounded-md"
             required
             name='email'
             type="text"
@@ -43,12 +44,14 @@ function Login() {
             <div className="px-1">
             <label className="block" htmlFor="password">Senha</label>
             <input
+            className="outline-none px-1 rounded-md"
             required
             name="password"
             type="password"
             onChange={(e) => {setPassword(e.target.value)}}></input>
             </div>
         </div>
+        <Link to='/signup' className="p-1 hover:text-white w-60">Registrar</Link>
         <button className="bg-blue-800 text-white rounded-md p-1 w-[180px]">Login</button>
         </div>
         </form>

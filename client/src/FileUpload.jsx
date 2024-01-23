@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "dropzone/dist/dropzone.css";
 import Dropzone from "dropzone";
+import "./index.css"
+
 
 const FileUpload = ({ onImageUrlChange }) => {
   const [imageUrl, setImageUrl] = useState(null);
@@ -27,11 +29,7 @@ const FileUpload = ({ onImageUrlChange }) => {
 
   return (
     <div>
-      <div id="my-dropzone" className="dropzone">
-        <p>
-          Arraste e solte um arquivo aqui, ou clique para selecionar um arquivo
-          (PNG ou JPG)
-        </p>
+      <div id="my-dropzone" className="p-20 h-52 w-52 bg-white rounded-md dropzone border-none">
       </div>
     </div>
   );
