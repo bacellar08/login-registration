@@ -29,7 +29,7 @@ No diretório server, crie um arquivo .env com as seguintes informações:
 
 dotenv
 Copy code
-DATABASE_URL='mongodb+srv://alexandrebacellar:Iepf7F5OJV48zrg0@cluster0.evqus2o.mongodb.net/usuarios'
+DATABASE_URL=sua_url_de_conexao_com_o_mongodb
 
 (O arquivo .env está no .gitignore por boas práticas, mas pelo propósito de testar, estou disponibilzando a url do banco de dados com a senha).
 
@@ -48,3 +48,5 @@ cd client
 npm start
 
 O aplicativo React será aberto em http://localhost:3000
+
+Lembre-se de substituir sua_url_de_conexao_com_o_mongodb na variável de ambiente DATABASE_URL pelo seu próprio endereço do MongoDB.
