@@ -31,8 +31,6 @@ dotenv
 Copy code
 DATABASE_URL=sua_url_de_conexao_com_o_mongodb
 
-(O arquivo .env está no .gitignore por boas práticas, mas pelo propósito de testar, estou disponibilzando a url do banco de dados com a senha).
-
 Inicie o servidor:
 
 
